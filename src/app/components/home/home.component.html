@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+  <div class="col-12 text-center my-3">
+    <h3> {{ title }} </h3>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-10">
+
+    <form class='position-relative col-2 d-flex'>
+      <input type="text" class="col-12 form-control border border-primary" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Buscar" >
+      <button type="submit" class="btn btn-primary" (click)="searchData( $event )">Buscar</button>
+    </form>
+
+    <table class="table table-success table-striped table-hover shadow-lg border border-primary">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>email</th>
+          <th>Rol</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users, let i = index">
+          <td> {{ i }}</td>
+          <td> {{ user.name }}</td>
+          <td> {{ user.surname }}</td>
+          <td> {{ user.email }}</td>
+          <td *ngIf="user.role === 'ADMIN_ROLE'"> Administrador</td>
+          <td *ngIf="user.role === 'USER_ROLE'"> Usuario</td>
+          <td *ngIf="user.role === 'VENTAS_ROLE'"> Ventas</td>
+          <td><a class="btn btn-outline-primary" href="#" role="button" [routerLink]="['/user', user.uid]"> Ver </a></td>
+          <td><a class="btn btn-outline-danger" role="button" *ngIf="userSession.role === 'ADMIN_ROLE'" (click)="deleteUser(user.uid)">Eliminar </a></td>
+          <td><a class="btn btn-outline-warning" href="#" role="button" *ngIf="user.uid === userSession.uid" [routerLink]="['/user-edit', user.uid]"> Editar </a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--spinner-->
+  <div class="cajaSpinner position-absolute top-50 start-50 translate-middle" *ngIf="spinner">
+    <div class="spinner"></div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+
+<div class="row justify-content-center my-4">
+  <div class="col-8 text-center text-primary">
+    <h3> Editar usuario</h3>
+  </div>
+  <div class="col-8 mt-2 d-flex justify-content-center">
+
+    <form #registerForm="ngForm" class="col-5 p-3 mb-3 position-relative border border-primary  shadow-lg rounded" [ngClass]="{ 'border-danger' : error, 'border-primary': !error}">
+
+      <div class="alert alert-danger" role="alert" *ngIf='error'>
+        No se pudo registrar el usuario {{ user.name }} por favor intentelo mas tarde
+      </div>
+
+      <div class="img-card mb-2 position-relative">
+        <img src="{{ user.img }}" alt="" *ngIf="user.img" class="card-img-top imgUser" >
+        <img src="../assets/image/default.png" alt=""  *ngIf="!user.img" class="card-img-top imgUser" >
+
+        <div class="sk-chase position-absolute top-50 start-50 translate-middle" *ngIf="spinnerImg">
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+        </div>
+
+      </div>
+
+      <div class="mb-3">
+        <label for="formFileSm" class="form-label">Cambiar imagen</label>
+        <input class="form-control form-control-sm" id="formFileSm" type="file" (change)="uploadFile($event.target )" >
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" name='name'  class="form-control" #name="ngModel" [(ngModel)]="user.name" required  pattern="[a-zA-Z ]{2,254}" (click)="setError()">
+        <div class="alertError" *ngIf=" !name.valid && name.touched">
+          El nombre no es valido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="surname" class="form-label">Apellido</label>
+        <input type="text" name='surname'  class="form-control" #surname="ngModel" [(ngModel)]="user.surname" pattern="[a-zA-Z ]{2,254}" (click)="setError()">
+        <div class="alertError" *ngIf="!surname.valid && surname.touched">
+          El apellido no es valido
+        </div>
+      </div>
+
+    <div class="form-group my-3">
+      <label for="password"> Seleccione un tipo de role </label>
+      <select name='role' class="form-select" aria-label="Default select example" #role="ngModel" [(ngModel)]="user.role" (click)="setError()">
+        <option *ngFor="let role of roles"  [value]='role.value' [selected]='user.role === role'> {{ role.name }} </option>
+      </select>
+    </div>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" [disabled]="registerForm.invalid">
+        Registrar?
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Editar a {{ user.name }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Esta seguro de editrar al usuario {{ user.name }} con los datos agregados
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class='btn btn-success' [disabled]="registerForm.invalid" (click)='editUser($event, registerForm)' data-bs-dismiss="modal">Editar!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--spinner-->
+      <div class="cajaSpinner position-absolute top-50 start-50 translate-middle" *ngIf="spinner">
+        <div class="spinner"></div>
+      </div>
+    </form>
+  </div>
+</div>

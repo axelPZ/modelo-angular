@@ -1,0 +1,73 @@
+DUCMENTACION DE POST-MAN del back-end  https://documenter.getpostman.com/view/12638722/TzY7dZEf
+
+
+CREAR APP CON ANGULAR
+
+ng new "nombre"                           1). se crea el proyecto y se le agrega el nombre
+                                          2). nos pregunta si queremos agregar el ruter al cual inidicaremos que no
+                                          3). pregunta el tipo de estilos al cual dejaremos CSS
+npm install bootstrap                     4). instalamos bootstrap
+npm install jquery                        5). instalamos jquery para utilizar bootstrap
+                                          6). se agrega bootstrap en el angular.json
+                                          7). se agrega jquery en el angular.json
+
+REGISTRARSE
+
+ng g component components/register 	        1). se crea el componente de registrar
+                                            2). se crea el formulario en la vista del componente
+                                            3). configura el app.module para poder utilizar los formularios
+
+                                            4). se crea el servicio de usuarios
+                                            5). se configura el app.module para poder hacer las peticiones ajax
+
+CONFIGURAR EL RUTING
+
+                                          1). se crea el angular.routing.ts
+                                          2). se crean los componentes de inicio, error y login
+                                          3). se configura el app.module para agregar las rutas
+                                          4). se configura el app.component.html para las rutas
+
+LOGIN
+
+                                          1). se configura los component del login
+                                          2). se agrega la funcion de login en el servicio del usuario
+                                          3). se guardan los datos de login en el localStorage
+                                          4). se configura el app.component.html para agregar los cambios
+
+CERRAR SESSION
+
+                                          1). se agrega una nueva ruta que vaya nueva mente al componente de login pero esta ruta llevara un parametro
+                                          2). se crea una funcion que siempre este escuchando en el logincomponente pero se lo se ejecutara si la ruta lleva un parametro
+
+PROTEJER LAS RUTAS
+
+                                          1). En los servicios se crear un archivo llamado identityGuard
+                                          2). se importa en las rutas y se agrega a las rutas a las cuales se les quiere resguardar
+                                          3). se configura el app.component para que funcione como un middleware, y se agrega a los providers al igual que el servicio que se utiliza para llevar las sessiones
+
+MOSTRAR LOS usuarios
+
+                                          1). se crea el metodo en el servicio de usuarios
+                                          2). se programa el componente de home para que pueda usar el metodo de los servicios
+
+VER DETALLE DEL USUARIO
+
+                                          1). se crea un nuevo componente userDetails
+                                          2). se agrega una nueva ruta haciendo referencia al componente creado anteriormente
+                                          3). se crea un nuevo metodo en el servicio para que traiga la info del usuario
+ELIMINAR USUARIO
+
+                                          1). en el homeComponent se crea un metodo para eliminar el usuario el cual reciva como argumento el id del usuario
+                                          2). traemos el token del usuario identificado para verificar si tiene los permisos adecuados
+
+EDITAR USUARIO
+
+                                          1). se crea un nuevo componente de edit-user,
+                                          2). se agrega una nueva ruta la cual reciva un parametro el cual sera el id del usuario
+                                          3). se programa la funcion para actualizar la imagen en el servicio del usuario
+                                          4). se programa la funcion para actualizar los datos del usuario
+
+FUNCION DE BUSCAR
+
+                                          1). se crea en el home.component.ts la buncion para BUSCAR
+                                          2). se crea en el servicio la funcion que busque y debuelba los valores de la busqueda

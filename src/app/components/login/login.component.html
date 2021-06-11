@@ -1,0 +1,43 @@
+
+  <div class="row justify-content-center">
+    <div class="col-8 my-3 text-center">
+      <h4> {{ title }}</h4>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10 d-flex justify-content-center">
+      <!-- <form class="col-md-5 pl-0" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)"  >-->
+
+      <form #registerForm="ngForm" class="col-5 p-3 mb-3 position-relative border border-primary  shadow-lg rounded" (ngSubmit)="onSubmit( registerForm )" [ngClass]="{ 'border-danger' : error, 'border-primary': !error}">
+
+        <div class="alert alert-danger" role="alert" *ngIf='error'>
+          {{ message }}
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Corrreo</label>
+          <input type="email" name='email'  class="form-control" #email="ngModel" [(ngModel)]="user.email" required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" (click)="setError()">
+          <div class="alertError" *ngIf=" !email.valid && email.touched">
+            El correo no es valido
+          </div>
+        </div>
+
+
+       <div class="mb-3">
+          <label for="password" class="form-label">Contrasenia</label>                                                                <!--pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,10}$"-->
+          <input type="password" name='password'  class="form-control" #password="ngModel" [(ngModel)]="user.password" required (click)="setError()">
+          <div class="alertError" *ngIf=" !password.valid && password.touched">
+            contrasenia no es valida
+          </div>
+        </div>
+
+        <button type="submit" class='btn btn-success' [disabled]="registerForm.invalid" data-bs-dismiss="modal">Ingresar</button>
+
+        <!--spinner-->
+        <div class="cajaSpinner position-absolute top-50 start-50 translate-middle" *ngIf="spinner">
+          <div class="spinner"></div>
+        </div>
+
+      </form>
+    </div>
+  </div>
